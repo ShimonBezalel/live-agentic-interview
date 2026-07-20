@@ -1,6 +1,6 @@
 # live-agentic-interview
 
-`live-agentic-interview` is a minimal Codex skill for live, hard-deadline coding interviews. It keeps the central promise visible, drives a demonstrable vertical slice, enables careful parallel work, and protects integration and verification time without turning the interview into project-management theater.
+`live-agentic-interview` is a harness-neutral agent skill for live, hard-deadline coding interviews. It keeps the central promise visible, drives a demonstrable vertical slice, enables careful parallel work, and protects integration and verification time without turning the interview into project-management theater.
 
 This MVP has **not yet been empirically validated in a real interview**. Practice with it before relying on it.
 
@@ -20,33 +20,33 @@ Before the interview:
 
 1. Install this skill at user scope.
 2. Install the Superpowers plugin.
-3. Verify this skill and Superpowers `test-driven-development` in a fresh session.
+3. Verify this skill and Superpowers `superpowers:test-driven-development` in a fresh session.
 4. Practice using separate terminals and worktrees.
 
 Do not install Superpowers during the timed exercise. The skill includes a concise red-green fallback if it is unexpectedly unavailable.
 
-### User-scoped installation
+### Download and install
 
-Copy or symlink the skill directory into your user skill directory:
+Clone the public repository:
 
 ```bash
-mkdir -p ~/.codex/skills
-ln -s /absolute/path/to/live-agentic-interview/skills/live-agentic-interview \
-  ~/.codex/skills/live-agentic-interview
+git clone https://github.com/ShimonBezalel/live-agentic-interview.git
 ```
 
-If the destination exists, inspect it instead of overwriting it blindly. Refresh Codex if needed, then invoke `$live-agentic-interview` in a fresh session.
+Copy or symlink `live-agentic-interview/skills/live-agentic-interview` into the current harness's user skill directory. Skill directories differ by harness; confirm the path in its documentation. If the destination exists, inspect it instead of overwriting it blindly.
+
+Open a fresh session and explicitly load the installed skill named `live-agentic-interview` using the harness's skill mechanism. Confirm that it states its assigned role before the interview begins.
 
 ## Recommended workflow
 
 1. Install and verify the skill and Superpowers before the interview.
 2. Open the exercise repository.
 3. Start one orchestrator session with [the orchestrator template](templates/orchestrator-start.md).
-4. Let it capture the success snapshot, choose the minimum slice, and generate any useful worker briefs.
-5. Paste briefs into separate terminals or isolated worktrees.
+4. Let it capture the success snapshot, choose the minimum slice, and coordinate any useful workers.
+5. In native coordination mode, let the orchestrator dispatch workers. In manual mode, paste briefs into separate terminals or isolated worktrees.
 6. Return concise handoffs or commits to the orchestrator.
 7. Let only the orchestrator integrate and verify the actual flow.
-8. Say `FINALIZE NOW` near the deadline.
+8. Say `FINALIZE NOW` near the deadline. In manual mode, broadcast it to every active worker and relay their handoffs.
 
 Separate terminals make roles obvious. Isolated worktrees are safest for writers; exact disjoint-file ownership is fine for small changes. Parallelism is optional and should earn its coordination cost.
 
@@ -56,15 +56,16 @@ The browser or phone timer remains authoritative. The skill does not implement t
 
 ```text
 ROLE: ORCHESTRATOR
-Invoke `live-agentic-interview`.
+Load the installed skill named `live-agentic-interview` using this harness's skill mechanism.
 EXERCISE: Implement the requirements in /tmp/exercise.md.
 REPOSITORY: /work/interview-app
 TIME: 60 minutes; deadline 2026-07-20 15:30 Asia/Jerusalem
 TOOLS: shell, editor, git, tests
 SUPERPOWERS: installed and verified
 PARALLELISM: up to 3 agents; writers use isolated worktrees
+COORDINATION_MODE: AUTO
 
-Keep coordination lightweight. Capture the success snapshot, choose the minimum passing slice, and output only useful copy-paste-ready worker briefs with non-overlapping ownership. You alone integrate, verify, and finalize.
+Keep coordination lightweight. Capture the success snapshot and choose the minimum passing slice. Dispatch useful workers directly when native coordination is available; otherwise output copy-paste-ready briefs of at most 150 words. Give non-overlapping ownership. You alone integrate, verify, and finalize.
 ```
 
 ## Minimal worker example
@@ -74,7 +75,7 @@ Use [the worker template](templates/worker-task.md) for writing tasks. A read-on
 ```text
 ROLE: WORKER
 WORKER_KIND: RECON
-Invoke `live-agentic-interview`.
+Load the installed skill named `live-agentic-interview` using this harness's skill mechanism.
 OBJECTIVE: Identify verified run/test commands and the narrowest change surface for the requested endpoint.
 REPOSITORY / WORKTREE: /work/interview-app
 KNOWN FACTS AND CONSTRAINTS: Do not edit; report only facts observed in the repository.
@@ -99,13 +100,13 @@ Add detail only when it helps integration. The orchestrator still inspects chang
 
 ## `FINALIZE NOW`
 
-`FINALIZE NOW` is an explicit operator control. It tells the orchestrator to stop scope growth, recall optional work, integrate only essential completed changes, verify the primary path, and prepare the interview response. It tells workers to stop refinement, run the most relevant validation, preserve useful work, and immediately hand off.
+`FINALIZE NOW` is an explicit operator control. It tells the orchestrator to stop scope growth, recall optional work, integrate only essential completed changes, verify the primary path, and prepare the interview response. It tells workers to stop refinement, run the most relevant validation, preserve useful work, and immediately hand off. In manual multi-terminal mode, the operator must send it to every active worker and relay their handoffs.
 
 ## MVP non-goals
 
 The MVP does not provide:
 
-- automatic agent spawning or prompt delivery;
+- custom agent-spawning or prompt-delivery infrastructure;
 - shared agent state;
 - automatic merging or timer management;
 - benchmark evaluation or model-specific adapters;

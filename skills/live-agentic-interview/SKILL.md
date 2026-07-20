@@ -37,7 +37,7 @@ Write code when it is the fastest path. Do not become a passive project manager.
 
 Acknowledge the role and kind. Own only the assignment and declared paths.
 
-MUST invoke `live-agentic-interview`, respect write boundaries, use the requested validation, report actual commands/results, and stop when the objective is complete or orchestrator authority is required.
+MUST load the installed skill named `live-agentic-interview` through the current harness's skill mechanism, respect write boundaries, use the requested validation, report actual commands/results, and stop when the objective is complete or orchestrator authority is required.
 
 MUST NOT broaden global scope, edit unrelated files, merge, integrate other workers, ask the interviewer, or spawn agents without authorization.
 
@@ -45,7 +45,7 @@ When context is incomplete, make a reversible local assumption and state it brie
 
 ## Superpowers TDD
 
-Invoke Superpowers `test-driven-development` for behavioral code changes. Do not copy its full method or install it during the interview.
+Load the installed Superpowers skill named `superpowers:test-driven-development` for behavioral code changes. Use the current harness's skill mechanism. Do not copy its full method or install it during the interview.
 
 If unavailable: write one focused failing test; confirm the intended failure; implement the minimum change; pass the focused test and relevant existing tests; refactor only while green.
 
@@ -59,7 +59,7 @@ Before broad implementation, write no more than five concise bullets unless the 
 MUST WORK: central observable behavior
 PROOF: acceptance check and real demonstration
 MUST PRESERVE: critical constraint or existing behavior
-IF TIME: optional value, if any
+OUT OF SCOPE: tempting work intentionally excluded
 BIGGEST RISK: current uncertainty most likely to block delivery
 ```
 
@@ -87,11 +87,13 @@ Do not study or refactor unrelated code.
 
 Parallelize only when expected benefit exceeds coordination cost. Two or three well-separated efforts are usually enough. Do not spawn merely to use available capacity.
 
+Choose `COORDINATION_MODE: AUTO`, `NATIVE`, or `MANUAL`. In `AUTO`, prefer native agent dispatch when the harness supports it and the operator allows it; otherwise use `MANUAL`. In `NATIVE`, dispatch and collect workers directly. In `MANUAL`, output copy-paste-ready briefs and expect the operator to relay handoffs.
+
 Prefer read-only research, independently testable work, disjoint files, or isolated worktrees. Avoid overlapping writers, duplicated full-solution attempts, parallel architecture redesigns, and documentation of unstable behavior.
 
 A useful early split MAY be recon plus minimum-slice implementation, with a test challenger only when acceptance risk is real. Start documentation after behavior stabilizes; documentation MUST describe verified behavior and commands only.
 
-Give each worker a self-contained brief containing only information that helps execution:
+Give each worker a self-contained brief containing only information that helps execution. Default to at most 150 words. Do not repeat generic rules already supplied by this skill.
 
 ```text
 ROLE: WORKER
@@ -141,7 +143,7 @@ Stop launching implementation workers below 25% remaining. A tiny verification t
 
 ## `FINALIZE NOW`
 
-On `FINALIZE NOW`, finalize immediately.
+On `FINALIZE NOW`, finalize immediately. In `NATIVE` mode, the orchestrator recalls workers directly. In `MANUAL` mode, tell the operator to broadcast `FINALIZE NOW` to every active worker and relay their handoffs.
 
 Orchestrator: stop scope growth, recall optional work, collect concise handoffs, integrate only necessary completed changes, verify the primary path, and prepare the response. Exclude risky partial work instead of debugging it indefinitely.
 

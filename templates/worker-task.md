@@ -6,7 +6,7 @@ Include only useful facts, but make the prompt self-contained for a fresh sessio
 ROLE: WORKER
 WORKER_KIND: <RECON | IMPLEMENTATION | TEST | DOCUMENTATION | VERIFICATION>
 
-Invoke `live-agentic-interview` now. Acknowledge this role, then complete only this assignment.
+Load the installed skill named `live-agentic-interview` using this harness's skill mechanism before acting. Acknowledge this role, then complete only this assignment.
 
 OBJECTIVE: <one narrow, independently completable outcome>
 REPOSITORY / WORKTREE: <absolute path; branch and starting commit for an isolated writer>
@@ -20,7 +20,7 @@ VALIDATION:
 DEADLINE / STOP CONDITION: <absolute deadline; when to stop>
 RETURN: concise handoff with status, work done, changed files/commit, validation, and anything the orchestrator must know
 
-Use Superpowers `test-driven-development` for behavioral changes. If unavailable, observe one focused intended test failure, implement the minimum change, and pass focused plus relevant existing tests. TDD is not required for read-only recon or prose-only documentation.
+Load the installed Superpowers skill named `superpowers:test-driven-development` for behavioral changes. If unavailable, observe one focused intended test failure, implement the minimum change, and pass focused plus relevant existing tests. TDD is not required for read-only recon or prose-only documentation.
 
 Do not globally replan, broaden scope, edit outside ownership, modify unrelated files, contact the interviewer, spawn agents, integrate other work, or merge. Make reversible local decisions autonomously. Stop and report only when a decision needs orchestrator authority.
 
